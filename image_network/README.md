@@ -1,7 +1,17 @@
 # Image-based Network
 
-This network learns to generate stylized views of color, depth an normal renders of point clouds. After training on a large dataset, it can be applied independently.
+This network learns to generate stylized views of color, depth an normal renders of point clouds. As an auxiliary output, it also generates corresponding depth maps. After training on a large dataset, it can be applied independently.
 Note that due to size constraints the dataset only contains a few example images.
+
+Example results:
+
+Input | Output | Depth Output | Ground Truth
+:--:|:--:|:--:|:--:
+<img src="./img/img_01_color.png" width="150"/> | <img src="./img/img_01_out.png" width="150"/> | <img src="./img/img_01_depth.png" width="150"/> | <img src="./img/img_01_gt.png" width="150"/>
+<img src="./img/img_02_color.png" width="150"/> | <img src="./img/img_02_out.png" width="150"/> | <img src="./img/img_02_depth.png" width="150"/> | <img src="./img/img_02_gt.png" width="150"/>
+<img src="./img/img_03_color.png" width="150"/> | <img src="./img/img_03_out.png" width="150"/> | <img src="./img/img_03_depth.png" width="150"/> | <img src="./img/img_03_gt.png" width="150"/>
+<img src="./img/img_04_color.png" width="150"/> | <img src="./img/img_04_out.png" width="150"/> | <img src="./img/img_04_depth.png" width="150"/> | <img src="./img/img_04_gt.png" width="150"/>
+
 
 The following (non-default) python packages are needed:
 * tensorflow 1.11.0
@@ -26,7 +36,7 @@ Logs and intermediate results are placed in *./log*, and can be visualized using
 
 A trained model can be applied by feeding in a stack of images consisting of a color, depth and normal pass of a view of a point cloud.
 Find an example in *eval.py*.
-*eval.py* can also be used to run a default evaluation on the images in the *test* folder. Don't forget to set the correct model path in the script. Results will be placed in the specified folder.
+`eval.py` can also be used to run a default evaluation on the images in the *test* folder. Don't forget to set the correct model path in the script. Results will be placed in the specified folder.
 Note that pretrained models are not included due to size restrictions. 
 
 ## Variant: Smoothing Network
@@ -34,7 +44,7 @@ Note that pretrained models are not included due to size restrictions.
 This network tries to achieve frame-to-frame consistency when generating views. 
 
 Training and test images must therefore be provided in a consecutive way when sorted by name, like the frames of a video.
-The *turntable_* scripts in *../blender_scripts* provide a suitable rendering process for Blender.
+The *turntable_x* scripts in *../blender_scripts* provide a suitable rendering process for Blender.
 Additionally, the training requires flow information for consecutive frames in .exr format.
 
 The training can be started with `smooth_network.py` and evaluated with `eval_smooth`. Don't forget to set the correct model folder in the latter.
